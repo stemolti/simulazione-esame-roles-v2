@@ -6,8 +6,8 @@ const router = Router();
 const controller = new MatchController();
 
 router.get('/', isAuthenticated, controller.getAll);
-router.post('/', isAuthenticated, isOrganizer, controller.create);
-router.put('/:id', isAuthenticated, isOrganizer, controller.update);
-router.delete('/:id', isAuthenticated, isOrganizer, controller.delete);
+router.post('/', isAuthenticated, controller.create);
+router.put('/:id', isAuthenticated, controller.update);
+router.delete('/:id', isAuthenticated, controller.delete);
 
 export default router;
