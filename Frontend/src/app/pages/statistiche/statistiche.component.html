@@ -1,0 +1,72 @@
+<div class="event-stats-container" role="main" aria-label="Statistiche eventi">
+  <h2>Statistiche Eventi</h2>
+
+  <form (ngSubmit)="onFilterApply()" class="filter-form" #filterForm="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Dal</mat-label>
+      <input matInput type="date" [(ngModel)]="fromDate" name="fromDate" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Al</mat-label>
+      <input matInput type="date" [(ngModel)]="toDate" name="toDate" />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="isLoading || filterForm.invalid"
+    >
+      Applica Filtro
+    </button>
+  </form>
+
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+  <!-- GRAFICO -->
+  <div class="chart-container" *ngIf="events.length > 0">
+    <canvas
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      chartType="bar"
+    >
+    </canvas>
+  </div>
+
+  <!-- TABELLA -->
+  <table
+    mat-table
+    [dataSource]="events"
+    class="mat-elevation-z8"
+    *ngIf="events.length > 0"
+  >
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Titolo Evento</th>
+      <td mat-cell *matCellDef="let e">{{ e.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Data</th>
+      <td mat-cell *matCellDef="let e">{{ e.date | date : "dd/MM/yyyy" }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalCheckins">
+      <th mat-header-cell *matHeaderCellDef>Check-in Effettuati</th>
+      <td mat-cell *matCellDef="let e">{{ e.totalCheckins }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="participationRate">
+      <th mat-header-cell *matHeaderCellDef>% Partecipazione</th>
+      <td mat-cell *matCellDef="let e">{{ e.participationRate }}%</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <p *ngIf="!isLoading && events.length === 0">
+    Nessun evento da visualizzare.
+  </p>
+</div>

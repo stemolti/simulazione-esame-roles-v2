@@ -1,0 +1,138 @@
+.event-stats-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
+  color: #333;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #4a4a4a;
+    text-align: center;
+  }
+
+  .filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+
+    mat-form-field {
+      width: 160px;
+
+      input {
+        cursor: pointer;
+      }
+    }
+
+    button {
+      align-self: center;
+      height: 40px;
+      min-width: 130px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+
+      &:disabled {
+        background-color: #ccc !important;
+        color: #666 !important;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  mat-progress-bar {
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+
+    th,
+    td {
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      color: #555;
+      font-weight: 600;
+      border-bottom: 2px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    tr:hover {
+      background-color: #f0f8ff;
+      cursor: default;
+    }
+
+    td {
+      color: #444;
+    }
+  }
+
+  p {
+    margin-top: 2rem;
+    font-style: italic;
+    color: #999;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .filter-form {
+      flex-direction: column;
+      align-items: stretch;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
+
+.event-stats-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  .filter-form {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .chart-container {
+    margin-bottom: 2rem;
+  }
+
+  table {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  mat-progress-bar {
+    margin: 1rem 0;
+  }
+}

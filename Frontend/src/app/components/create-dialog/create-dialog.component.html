@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Crea un nuovo evento</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Titolo</mat-label>
+    <input matInput formControlName="title" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Descrizione</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Data</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [min]="minDate"
+      formControlName="date"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Annulla</button>
+  <button mat-flat-button color="primary" (click)="submit()">Crea</button>
+</mat-dialog-actions>

@@ -1,0 +1,77 @@
+<div class="sidebar" [class.closed]="isClosed">
+  <div class="sidebar-content">
+    <!-- Header con il logo -->
+    <div class="sidebar-header">
+      <div class="icon-container">
+        <mat-icon>business_center</mat-icon>
+      </div>
+      <div class="logo">Portale Eventi</div>
+    </div>
+
+    <!-- Foto profilo e nome utente -->
+    <div class="user-profile" *ngIf="user">
+      <img [src]="user.picture" alt="Profile Picture" class="profile-pic" />
+      <div class="user-info">
+        <span class="user-name">{{ user.firstName }} {{ user.lastName }}</span>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="nav-items">
+      <div
+        class="nav-item"
+        [class.closed]="isClosed"
+        [class.active]="isActive('/home')"
+        routerLink="/home"
+        (click)="toggleSidebar()"
+      >
+        <mat-icon>home</mat-icon>
+        <span *ngIf="!isClosed">Home</span>
+      </div>
+      <div
+        class="nav-item"
+        routerLink="/user"
+        [class.closed]="isClosed"
+        [class.active]="isActive('/user')"
+        (click)="toggleSidebar()"
+      >
+        <mat-icon>person</mat-icon>
+        <span *ngIf="!isClosed">Profilo</span>
+      </div>
+      <div
+        class="nav-item"
+        routerLink="/event-stats"
+        [class.closed]="isClosed"
+        [class.active]="isActive('/event-stats')"
+        (click)="toggleSidebar()"
+        *ngIf="user?.role === 'organizzatore'"
+      >
+        <mat-icon>security</mat-icon>
+        <span *ngIf="!isClosed">Operatori</span>
+      </div>
+      <div
+        class="nav-item"
+        routerLink="/check-in"
+        [class.closed]="isClosed"
+        [class.active]="isActive('/check-in')"
+        (click)="toggleSidebar()"
+        *ngIf="user?.role === 'organizzatore'"
+      >
+        <mat-icon>assignment_turned_in</mat-icon>
+        <span *ngIf="!isClosed">Check-in</span>
+      </div>
+    </div>
+
+    <!-- Logout -->
+    <div class="logout-container">
+      <p (click)="logout.emit()" class="log-out-btn">
+        <mat-icon>logout</mat-icon> Logout
+      </p>
+    </div>
+
+    <!-- Toggle button -->
+    <div class="toggle-button" (click)="toggleSidebar()">
+      <mat-icon>{{ isClosed ? "arrow_forward" : "arrow_back" }}</mat-icon>
+    </div>
+  </div>
+</div>

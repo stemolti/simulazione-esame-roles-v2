@@ -1,0 +1,80 @@
+@import "../../../styles.scss";
+
+.registrations-container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+
+  h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c2c2c;
+    margin-bottom: 35px;
+    text-align: center;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: $light-gray;
+    font-size: 1.2rem;
+    margin-top: 60px;
+  }
+
+  .event-card {
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    border: 1px solid $border-color;
+    transition: transform 0.2s;
+
+    mat-card-header {
+      padding-bottom: 0;
+    }
+
+    mat-card-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #1f1f1f;
+    }
+
+    mat-card-subtitle {
+      color: #757575;
+      font-size: 1rem;
+    }
+
+    mat-card-content {
+      padding-top: 10px;
+
+      p {
+        margin-top: 10px;
+        color: #5b4a3a;
+        font-size: 1.05rem;
+        line-height: 1.5;
+      }
+    }
+
+    mat-card-actions {
+      padding: 16px;
+      display: flex;
+      justify-content: flex-end;
+
+      button[mat-raised-button][color="warn"] {
+        background-color: #d32f2f; // rosso Material
+        color: white;
+
+        &:hover {
+          background-color: #b71c1c;
+        }
+      }
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}

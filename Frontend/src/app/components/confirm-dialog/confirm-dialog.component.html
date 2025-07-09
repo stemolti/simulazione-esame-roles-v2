@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Conferma disiscrizione</h2>
+<mat-dialog-content>
+  <p>
+    Vuoi davvero annullare l'iscrizione a <strong>{{ data.title }}</strong
+    >?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close(false)">Annulla</button>
+  <button mat-button color="warn" (click)="dialogRef.close(true)">
+    Conferma
+  </button>
+</mat-dialog-actions>

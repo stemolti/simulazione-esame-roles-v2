@@ -1,0 +1,213 @@
+@import "../../../styles.scss";
+
+// Mixins per breakpoints
+@mixin mobile {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 600px) and (max-width: 959px) {
+    @content;
+  }
+}
+
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7ff 0%, #c3e0ff 100%);
+  padding: 2.5rem 3rem;
+
+  @include mobile {
+    padding: 1rem 1.5rem;
+  }
+}
+
+.content-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12) !important;
+  border-radius: 20px !important;
+  background-color: #fff;
+
+  @include mobile {
+    padding: 1.5rem 1.5rem;
+  }
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  h1 {
+    font-size: 2.4rem;
+    margin: 0;
+    color: #222;
+    font-weight: 600;
+
+    @include mobile {
+      font-size: 1.9rem;
+    }
+  }
+
+  .subtitle {
+    color: #555;
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 400;
+
+    @include mobile {
+      font-size: 1rem;
+    }
+  }
+}
+
+.search-field {
+  width: 100%;
+  margin: 2rem 0 2.5rem 0;
+
+  @include mobile {
+    margin: 1.2rem 0 1.8rem 0;
+  }
+
+  ::ng-deep .mat-mdc-form-field-outline {
+    background-color: #fff;
+    border-radius: 8px;
+  }
+}
+
+.zones-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.8rem;
+
+  @include tablet {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.4rem;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.zone-card {
+  background-color: #ffffff;
+  padding: 1.8rem 2rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    // transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  }
+
+  @include mobile {
+    padding: 1.2rem 1.4rem;
+  }
+
+  .arrow-icon {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $primary-color;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .zone-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.3rem;
+
+    .zone-icon {
+      color: $primary-color;
+      font-size: 28px;
+    }
+
+    .zone-cap {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #222;
+      word-break: break-word;
+    }
+  }
+
+  .zone-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    .detail-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      align-items: center;
+
+      .label {
+        min-width: 110px;
+        font-weight: 600;
+        color: #666;
+        font-size: 0.95rem;
+      }
+
+      .value {
+        color: #333;
+        font-weight: 500;
+        font-size: 1rem;
+        flex: 1;
+        word-break: break-word;
+      }
+    }
+  }
+}
+
+.spinner {
+  margin: 3rem auto;
+  display: block;
+}
+
+.no-results {
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 3rem 1rem;
+  color: #666;
+
+  mat-icon {
+    font-size: 52px;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 1.2rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
