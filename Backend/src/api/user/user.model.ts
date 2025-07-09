@@ -1,19 +1,15 @@
 import mongoose, { Schema } from 'mongoose';
-import { User, UserRole } from './user.entity';
+import { User } from './user.entity';
 
 const userSchema = new Schema<User>(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    username: { type: String, required: true, unique: true },
     picture: { type: String },
+    username: { type: String, required: true },
     isConfirmed: { type: Boolean, default: true },
-    role: {
-      type: String,
-      enum: ['dipendente', 'organizzatore'] as UserRole[],
-      required: true,
-      default: 'dipendente',
-    },
+    registeredForTournament: { type: Boolean, default: false },
+    tournamentOrganizer: { type: Boolean, default: false },
   },
   {
     toJSON: {
@@ -21,7 +17,6 @@ const userSchema = new Schema<User>(
       transform: (_, ret) => {
         delete ret._id;
         delete ret.__v;
-        delete ret.isConfirmed;
         return ret;
       },
     },

@@ -3,6 +3,7 @@ import { UserIdentityModel } from '../../utils/auth/local/user-identity.model';
 import { User } from './user.entity';
 import { UserModel } from './user.model';
 import * as bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import {
   PasswordMismatchError,
   SamePasswordError,
@@ -19,9 +20,7 @@ export class UserService {
     if (existingIdentity) {
       throw new UserExistsError();
     }
-
     const hashedPassword = await bcrypt.hash(credentials.password, 10);
-
     const newUser = await UserModel.create(user);
     await UserIdentityModel.create({
       provider: 'local',
@@ -31,13 +30,34 @@ export class UserService {
         hashedPassword,
       },
     });
-
     return newUser;
   }
 
+  async login(username: string, password: string): Promise<string | null> {
+    const identity = await UserIdentityModel.findOne({
+      'credentials.username': username,
+    }).populate('user');
+    if (!identity) return null;
+    const valid = await bcrypt.compare(
+      password,
+      identity.credentials.hashedPassword,
+    );
+    if (!valid) return null;
+    const user = identity.user as User;
+    const token = jwt.sign(
+      {
+        id: user.id,
+        username: user.username,
+        tournamentOrganizer: user.tournamentOrganizer,
+      },
+      process.env.JWT_SECRET || 'secret',
+      { expiresIn: '7d' },
+    );
+    return token;
+  }
+
   async list(): Promise<User[]> {
-    const userList = await UserModel.find();
-    return userList;
+    return UserModel.find();
   }
 
   async updatePassword(
@@ -48,32 +68,19 @@ export class UserService {
     if (newPassword !== confirmPassword) {
       throw new PasswordMismatchError();
     }
-    var existingIdentity = await UserIdentityModel.findOne({
-      user: user.id!,
-    });
-
+    const identity = await UserIdentityModel.findOne({ user: user.id! });
     if (
-      await this._comparePassword(
-        newPassword,
-        existingIdentity!.credentials.hashedPassword,
-      )
+      await bcrypt.compare(newPassword, identity!.credentials.hashedPassword)
     ) {
       throw new SamePasswordError();
     }
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    existingIdentity!.credentials.hashedPassword = hashedPassword;
-
-    existingIdentity!.save();
-
-    return await this._getById(user.id!);
+    identity!.credentials.hashedPassword = await bcrypt.hash(newPassword, 10);
+    await identity!.save();
+    return this._getById(user.id!);
   }
+
   private async _getById(userId: string) {
-    return await UserModel.findOne({ _id: userId });
-  }
-
-  private async _comparePassword(notEncripted: string, enrcripted: string) {
-    const match = await bcrypt.compare(notEncripted, enrcripted);
-    return match;
+    return UserModel.findById(userId);
   }
 }
 
