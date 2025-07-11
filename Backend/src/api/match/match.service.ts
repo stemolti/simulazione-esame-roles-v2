@@ -39,4 +39,9 @@ export class MatchService {
   async delete(id: string) {
     return MatchModel.findByIdAndDelete(id);
   }
+
+  async updateResult(id: string, { pointsA, pointsB, played }: { pointsA: number; pointsB: number; played: boolean }) {
+    if (!validScore(pointsA, pointsB)) throw new Error('Invalid score');
+    return MatchModel.findByIdAndUpdate(id, { pointsA, pointsB, played }, { new: true });
+  }
 }

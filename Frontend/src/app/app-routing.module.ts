@@ -1,45 +1,44 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ParticipantsComponent } from './components/participants/participants.component';
-import { MatchesComponent } from './components/matches/matches.component';
-import { MatchFormComponent } from './components/match-form/match-form.component';
-import { AuthGuard } from './guards/auth.guard';
-import { ParticipantGuard } from './guards/participant.guard';
-import { OrganizerGuard } from './guards/organizer.guard';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { homeGuard } from './guards/home.guard';
+import { HomeComponent } from './pages/home/home.component';
+import { authGuard } from './guards/auth.guard';
+import { EventDetailComponent } from './pages/event-detail/event-detail.component';
+import { UserComponent } from './pages/user/user.component';
+import { CheckInComponent } from './pages/check-in/check-in.component';
+import { StatisticheComponent } from './pages/statistiche/statistiche.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [homeGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [homeGuard] },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard],
+    path: 'event-detail/:id',
+    component: EventDetailComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'participants',
-    component: ParticipantsComponent,
-    canActivate: [AuthGuard, ParticipantGuard],
+    path: 'user',
+    component: UserComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'matches',
-    component: MatchesComponent,
-    canActivate: [AuthGuard, ParticipantGuard],
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'matches/new',
-    component: MatchFormComponent,
-    canActivate: [AuthGuard, OrganizerGuard],
+    path: 'check-in',
+    component: CheckInComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'matches/:id',
-    component: MatchFormComponent,
-    canActivate: [AuthGuard, OrganizerGuard],
+    path: 'event-stats',
+    component: StatisticheComponent,
+    canActivate: [authGuard],
   },
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: '**', redirectTo: 'dashboard' },
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { plainToInstance } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
-import { CreateMatchDto, UpdateMatchDto } from './match.dto';
+import { CreateMatchDto, UpdateMatchDto, UpdateResultDto } from './match.dto';
 import { MatchService } from './match.service';
 
 const service = new MatchService();
@@ -44,5 +44,21 @@ export class MatchController {
       return;
     }
     res.status(204).send();
+  }
+
+  async updateResult(req: Request, res: Response) {
+    try {
+      const dto = plainToInstance(UpdateResultDto, req.body);
+      await validateOrReject(dto);
+      const { pointsA, pointsB, played } = dto;
+      const match = await service.updateResult(req.params.id, { pointsA, pointsB, played });
+      if (!match) {
+        res.status(404).json({ message: 'Match not found' });
+        return;
+      }
+      res.json(match);
+    } catch (e) {
+      res.status(400).json({ message: (e as Error).message });
+    }
   }
 }

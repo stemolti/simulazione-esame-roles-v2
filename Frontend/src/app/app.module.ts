@@ -1,51 +1,95 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from './components/loader/loader.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AuthInterceptor } from './utils/auth.interceptor';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { EventDetailComponent } from './pages/event-detail/event-detail.component';
+import { EventRegistrationComponent } from './components/event-registration/event-registration.component';
+import { UserComponent } from './pages/user/user.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { CheckInComponent } from './pages/check-in/check-in.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { StatisticheComponent } from './pages/statistiche/statistiche.component';
+import { MatTableModule } from '@angular/material/table';
+import { registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
+import { LOCALE_ID } from '@angular/core';
+import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ParticipantsComponent } from './components/participants/participants.component';
-import { MatchesComponent } from './components/matches/matches.component';
-import { MatchFormComponent } from './components/match-form/match-form.component';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
-
+registerLocaleData(localeIt);
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent,
-    ParticipantsComponent,
-    MatchesComponent,
-    MatchFormComponent,
+    HomeComponent,
+    LoaderComponent,
+    SidebarComponent,
+    EventDetailComponent,
+    EventRegistrationComponent,
+    UserComponent,
+    ConfirmDialogComponent,
+    CreateDialogComponent,
+    EditDialogComponent,
+    CheckInComponent,
+    StatisticheComponent,
   ],
   imports: [
     BrowserModule,
+    NgChartsModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
     AppRoutingModule,
-    // Material
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatIconModule,
     MatTableModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatProgressBarModule,
+    HttpClientModule,
     MatCardModule,
-    MatSlideToggleModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    FormsModule,
+    MatDialogModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    { provide: LOCALE_ID, useValue: 'it-IT' },
   ],
   bootstrap: [AppComponent],
 })
