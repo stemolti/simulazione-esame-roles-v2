@@ -33,7 +33,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http
-      .post<{ user: User; token: string }>(`${apiUrl}/login`, {
+      .post<{ user: User; token: string }>(`${apiUrl}/users/login`, {
         username,
         password,
       })
@@ -52,7 +52,7 @@ export class AuthService {
     password: string,
     confirmPassword: string
   ) {
-    return this.http.post(`${apiUrl}/register`, {
+    return this.http.post(`${apiUrl}/users/register`, {
       firstName,
       lastName,
       username,

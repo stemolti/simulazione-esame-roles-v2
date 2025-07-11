@@ -44,7 +44,7 @@
         [class.closed]="isClosed"
         [class.active]="isActive('/event-stats')"
         (click)="toggleSidebar()"
-        *ngIf="user?.role === 'organizzatore'"
+        *ngIf="user?.tournamentOrganizer"
       >
         <mat-icon>security</mat-icon>
         <span *ngIf="!isClosed">Operatori</span>
@@ -55,7 +55,7 @@
         [class.closed]="isClosed"
         [class.active]="isActive('/check-in')"
         (click)="toggleSidebar()"
-        *ngIf="user?.role === 'organizzatore'"
+        *ngIf="user?.tournamentOrganizer"
       >
         <mat-icon>assignment_turned_in</mat-icon>
         <span *ngIf="!isClosed">Check-in</span>

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-import { HomeComponent } from './pages/home/home.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,23 +20,21 @@ import { AuthInterceptor } from './utils/auth.interceptor';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { EventDetailComponent } from './pages/event-detail/event-detail.component';
-import { EventRegistrationComponent } from './components/event-registration/event-registration.component';
-import { UserComponent } from './pages/user/user.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
-import { CheckInComponent } from './pages/check-in/check-in.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { StatisticheComponent } from './pages/statistiche/statistiche.component';
 import { MatTableModule } from '@angular/material/table';
 import { registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
 import { LOCALE_ID } from '@angular/core';
 import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ParticipantsComponent } from './pages/participants/participants.component';
+import { MatchesComponent } from './pages/matches/matches.component';
+import { MatchManagementComponent } from './pages/match-management/match-management.component';
+import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
 
 registerLocaleData(localeIt);
 @NgModule({
@@ -45,17 +42,10 @@ registerLocaleData(localeIt);
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     LoaderComponent,
     SidebarComponent,
-    EventDetailComponent,
-    EventRegistrationComponent,
-    UserComponent,
     ConfirmDialogComponent,
-    CreateDialogComponent,
-    EditDialogComponent,
-    CheckInComponent,
-    StatisticheComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -93,4 +83,4 @@ registerLocaleData(localeIt);
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

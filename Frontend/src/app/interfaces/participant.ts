@@ -1,6 +1,4 @@
-export type UserRole = 'dipendente' | 'organizzatore';
-
-export interface User {
+export interface Participant {
   id?: string;
   firstName: string;
   lastName: string;
@@ -9,4 +7,4 @@ export interface User {
   isConfirmed: boolean;
   registeredForTournament?: boolean;
   tournamentOrganizer?: boolean;
-}
+} 

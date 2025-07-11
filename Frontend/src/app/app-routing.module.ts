@@ -2,47 +2,29 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-import { homeGuard } from './guards/home.guard';
-import { HomeComponent } from './pages/home/home.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ParticipantsComponent } from './pages/participants/participants.component';
+import { MatchesComponent } from './pages/matches/matches.component';
+import { MatchManagementComponent } from './pages/match-management/match-management.component';
+import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
 import { authGuard } from './guards/auth.guard';
-import { EventDetailComponent } from './pages/event-detail/event-detail.component';
-import { UserComponent } from './pages/user/user.component';
-import { CheckInComponent } from './pages/check-in/check-in.component';
-import { StatisticheComponent } from './pages/statistiche/statistiche.component';
+import { ParticipantGuard } from './guards/participant.guard';
+import { OrganizerGuard } from './guards/organizer.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [homeGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [homeGuard] },
-  {
-    path: 'event-detail/:id',
-    component: EventDetailComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'user',
-    component: UserComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'check-in',
-    component: CheckInComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'event-stats',
-    component: StatisticheComponent,
-    canActivate: [authGuard],
-  },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  { path: 'participants', component: ParticipantsComponent, canActivate: [ParticipantGuard] },
+  { path: 'matches', component: MatchesComponent, canActivate: [ParticipantGuard] },
+  { path: 'match-management', component: MatchManagementComponent, canActivate: [OrganizerGuard] },
+  { path: 'leaderboard', component: LeaderboardComponent, canActivate: [ParticipantGuard] },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/dashboard' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
