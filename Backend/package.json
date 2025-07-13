@@ -8,7 +8,7 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Sergio Meneguzzo",
+  "author": "Stefano Agbodan",
   "license": "ISC",
   "description": "",
   "dependencies": {
