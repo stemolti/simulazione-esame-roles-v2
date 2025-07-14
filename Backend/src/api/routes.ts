@@ -10,6 +10,6 @@ router.use('/', userRouter);
 router.use('/match', matchRouter);
 router.use('/tournament', tournamentRouter);
 router.use('/partecipants', partecipantsRouter);
-router.use('/users', authRouter);
+router.use(authRouter);
 
 export default router;
