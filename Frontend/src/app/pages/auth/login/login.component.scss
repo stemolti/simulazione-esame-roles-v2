@@ -1,183 +1,141 @@
-body,
-.login-bg {
-  min-height: 100vh;
-  background: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@import "../../../../styles.scss";
+
+@mixin mobile {
+  @media (max-width: 599px) {
+    @content;
+  }
 }
 
-.login-bg {
-  width: 100vw;
+@mixin tablet {
+  @media (min-width: 600px) and (max-width: 959px) {
+    @content;
+  }
+}
+
+.login-container {
   height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f5f7ff 0%, #c3e0ff 100%);
+  padding: 1rem;
+
+  @include mobile {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
 }
 
-.login-card-custom {
-  background: #181818;
-  border-radius: 16px;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
-  padding: 2.5rem 2rem 2rem 2rem;
+.login-card {
   width: 100%;
-  max-width: 370px;
+  max-width: 400px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 16px !important;
+
+  @include mobile {
+    padding: 1.5rem;
+    box-shadow: none !important;
+    background-color: transparent;
+  }
+
+  mat-card-header {
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2rem;
+
+    @include mobile {
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+      color: #333;
+      font-weight: 500;
+
+      @include mobile {
+        font-size: 1.75rem;
+      }
+    }
+
+    .subtitle {
+      color: #666;
+      margin: 0.5rem 0 0;
+      font-size: 1rem;
+
+      @include mobile {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.form-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1rem;
+
+  @include mobile {
+    gap: 0.75rem;
+  }
 }
 
-.brand-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1.5rem;
+.full-width {
+  width: 100%;
 }
 
-.logo-circle {
-  background: #fff;
-  color: #111;
-  font-size: 2.2rem;
-  border-radius: 50%;
-  width: 54px;
-  height: 54px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-.login-title {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.2rem;
+.login-link {
   text-align: center;
+  margin-top: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
-.login-subtitle {
-  color: #bbb;
+.login-button {
+  height: 48px;
   font-size: 1rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.social-login {
+  margin-top: 1rem;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.2rem;
+
+  @include mobile {
+    height: 44px;
+    font-size: 0.95rem;
+  }
+
+  .spinner {
+    display: inline-block;
+    margin-right: 8px;
+  }
 }
 
-.social-btn {
-  width: 100%;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.7rem 0;
-  font-size: 1rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
+::ng-deep {
+  .mat-mdc-form-field-outline {
+    background-color: #ffffff;
 
-.social-btn.google .icon {
-  font-size: 1.2rem;
-  background: #fff;
-  color: #ea4335;
-  border-radius: 50%;
-  width: 1.7rem;
-  height: 1.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
+    @include mobile {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+  }
 
-.social-btn:hover {
-  background: #333;
-}
+  .mat-mdc-raised-button {
+    border-radius: 24px;
+  }
 
-.input-group {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.1rem;
-}
-
-.input-group label {
-  color: #fff;
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.input-group input {
-  background: #222;
-  color: #fff;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 0.7rem 1rem;
-  font-size: 1rem;
-  outline: none;
-  transition: border 0.2s;
-}
-
-.input-group input:focus {
-  border: 1.5px solid #fff;
-}
-
-.forgot-link {
-  color: #bbb;
-  font-size: 0.95rem;
-  text-decoration: underline;
-  margin-left: 0.5rem;
-}
-
-.cta-btn {
-  width: 100%;
-  background: #fff;
-  color: #111;
-  border: none;
-  border-radius: 8px;
-  padding: 0.8rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-top: 0.5rem;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.cta-btn:hover {
-  background: #eaeaea;
-  color: #000;
-}
-
-.signup-link {
-  color: #fff;
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 1rem;
-}
-
-.signup-link a {
-  color: #fff;
-  text-decoration: underline;
-  font-weight: 500;
-}
-
-@media (max-width: 600px) {
-  .login-card-custom {
-    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
-    max-width: 98vw;
+  .mat-mdc-form-field {
+    @include mobile {
+      font-size: 0.95rem;
+    }
   }
 }
